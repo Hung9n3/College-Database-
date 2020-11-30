@@ -1,6 +1,5 @@
 ﻿using Entities.StudentCourses;
 using Entity.Course;
-using Entity.Location;
 using Entity.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,9 +18,6 @@ namespace Entity.Context
         }
         public DbSet<Courses> Courses { get; set; }
         public DbSet<Department> Departments { get; set; }
-       public DbSet<Address> Addresses { get; set; }
-       public DbSet<City> City { get; set; }
-       public DbSet<Districts> Districts { get; set; }
        public DbSet<Student> Students { get; set; }
        public DbSet<Teacher> Teachers { get; set; }
        public DbSet<UserModel> UserModel { get; set; }

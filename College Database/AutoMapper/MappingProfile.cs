@@ -7,7 +7,6 @@ using College_Database.AutoMapper.DataObject;
 using College_Database.AutoMapper.DataObject.Get;
 using College_Database.AutoMapper.DataObject.Post;
 using Entity.Course;
-using Entity.Location;
 using Entity.User;
 
 namespace College_Database.AutoMapper
@@ -18,8 +17,7 @@ namespace College_Database.AutoMapper
         {
             CreateMap<ApplicationUserModel, UserModel>().ForMember(x => x.Id, opt => opt.Ignore());
                 
-            CreateMap<CityDTO, City>().ForMember(x => x.CityId, opt => opt.Ignore());
-            CreateMap<DistrictDTO, Districts>().ForMember(x => x.DistrictId, opt => opt.Ignore());
+            
             CreateMap<UserModel, UserDTO>().ForMember(x => x.Address, opt => opt.Ignore());
             CreateMap<DepartmentDTO, Department>().ForMember(x => x.DepartmentId, opt => opt.Ignore());
             CreateMap<CoursesPostDTO, Courses>().ForMember(x => x.CoursesId, opt => opt.Ignore());

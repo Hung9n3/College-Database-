@@ -4,14 +4,16 @@ using Entity.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepoContext))]
-    partial class RepoContextModelSnapshot : ModelSnapshot
+    [Migration("20201130065449_ver 0")]
+    partial class ver0
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,14 +43,14 @@ namespace Entities.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("AvailableSeat")
+                        .HasColumnType("int");
+
                     b.Property<string>("CoursesName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Credits")
                         .HasColumnType("int");
-
-                    b.Property<string>("Day")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
@@ -56,19 +58,10 @@ namespace Entities.Migrations
                     b.Property<int>("Periods")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rest")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Room")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Size")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StartPeriod")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("seat")
                         .HasColumnType("int");
 
                     b.HasKey("CoursesId");

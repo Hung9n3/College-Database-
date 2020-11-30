@@ -1,5 +1,4 @@
-﻿using Entity.Location;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,7 +10,7 @@ namespace Entity.User
         public string Password { get; set; }
         public string FullName { get; set; }
         public int Phone { get; set; }
-        public Address Address { get;set; }
+        public string Address { get;set; }
         public int CityId { get; set; }
         public int DistrictId { get; set; }
         public DateTime BirthDate { get; set; }

@@ -1,5 +1,4 @@
 ﻿using Entity.Course;
-using Entity.Location;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +13,7 @@ namespace College_Database.AutoMapper.DataObject.Get
         public int Phone { get; set; }
         public string Role { get; set; }
         public DateTime BirthDate { get; set; }
-        public AddressGetDTO Address { get; set; }
+        public string Address { get; set; }
         public ICollection<Courses> Courses { get; set; }
     }
 }

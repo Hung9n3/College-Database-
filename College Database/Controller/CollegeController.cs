@@ -10,7 +10,6 @@ using Contracts;
 using Entities.User;
 using Entity.Context;
 using Entity.Course;
-using Entity.Location;
 using Entity.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -31,24 +30,18 @@ namespace College_Database.Controller
         private readonly ApplicationSettings _appSettings;
         private RepoContext _repoContext;
         private IMapper _mapper;
-        private IRepoCity _repoCity;
-        private IRepoDistrict _repoDistrict;
         private IRepoTeacher _repoTeacher;
         private IRepoStudent _repoStudent;
-        private IRepoAddress _repoAddress;
         private IRepoCourses _repoCourses;
-        public CollegeController(IMapper mapper, IRepoStudent repoStudent, IRepoTeacher repoTeacher, IRepoAddress repoAddress, 
-                                IRepoCity repoCity, IRepoDistrict repoDistrict, RepoContext repoContext, UserManager<UserModel> userManager,
+        public CollegeController(IMapper mapper, IRepoStudent repoStudent, IRepoTeacher repoTeacher 
+                                , RepoContext repoContext, UserManager<UserModel> userManager,
                                 SignInManager<UserModel> signInManager, IOptions<ApplicationSettings> appSettings, IRepoCourses repoCourses)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _appSettings = appSettings.Value;
             _repoContext = repoContext;
-            _repoAddress = repoAddress;
-            _repoCity = repoCity;
             _repoCourses = repoCourses;
-            _repoDistrict = repoDistrict;
             _repoTeacher = repoTeacher;
             _repoStudent = repoStudent;
             _mapper = mapper;
@@ -110,13 +103,11 @@ namespace College_Database.Controller
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> UpdateUserInfo(ApplicationUserModel applicationUserModel, int cityid,int districtid)
         {
-            applicationUserModel.Address.City = await _repoCity.FindByIdAsync(cityid);
-            applicationUserModel.Address.Districts = await _repoDistrict.FindByIdAsync(districtid);
+
             var userId = User.Claims.First(c => c.Type == "UserId").Value;
-            var user = await _repoContext.UserModel.Include(x => x.Address).Include(x => x.Address.City)
-                .Include(x => x.Address.Districts).FirstOrDefaultAsync(x => x.Id == userId);
+            var user = await _repoContext.UserModel
+                .FirstOrDefaultAsync(x => x.Id == userId);
             _mapper.Map(applicationUserModel, user);
-            _repoAddress.Update(user.Address);
             await _repoContext.SaveChangesAsync();
             return Ok();
         }

@@ -16,7 +16,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
 using Contracts;
-using Entity.Location;
 using College_Database.AutoMapper.DataObject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
@@ -36,23 +35,17 @@ namespace WebApplication4.Controllers
         private readonly ApplicationSettings _appSettings;
         private RepoContext _repoContext;
         private IMapper _mapper;
-        private IRepoCity _repoCity;
-        private IRepoDistrict _repoDistrict;
         private IRepoTeacher _repoTeacher;
         private IRepoStudent _repoStudent;
-        private IRepoAddress _repoAddress;
         private IRepoCourses _repoCourses;
-        public UserController(IMapper mapper,IRepoStudent repoStudent,IRepoTeacher repoTeacher,IRepoAddress repoAddress,
-            IRepoCity repoCity, IRepoDistrict repoDistrict,  RepoContext repoContext,UserManager<UserModel> userManager, 
+        public UserController(IMapper mapper,IRepoStudent repoStudent,IRepoTeacher repoTeacher,
+              RepoContext repoContext,UserManager<UserModel> userManager, 
             SignInManager<UserModel> signInManager, IOptions<ApplicationSettings> appSettings, IRepoCourses repoCourses)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _appSettings = appSettings.Value;
             _repoContext = repoContext;
-            _repoAddress = repoAddress;
-            _repoCity = repoCity;
-            _repoDistrict = repoDistrict;
             _repoTeacher = repoTeacher;
             _repoCourses = repoCourses;
             _repoStudent = repoStudent;
@@ -60,16 +53,10 @@ namespace WebApplication4.Controllers
         }
         
        
-        [HttpPost("{cityid}/{districtid}")]
-        public async Task<Object> Register(ApplicationUserModel model, int cityid, int districtid)
+        [HttpPost]
+        public async Task<Object> Register(ApplicationUserModel model)
         {
-            var address = new Address()
-            {
-                City = await _repoCity.FindByIdAsync(cityid),
-                Districts = await _repoDistrict.FindByIdAsync(districtid)
-        };
-            _repoAddress.Create(address);
-            model.Address = address;
+           
             var applicationUser = _mapper.Map<UserModel>(model);
             var result = await _userManager.CreateAsync(applicationUser, model.Password);
             var user = _repoContext.UserModel.Where(x => x.UserName.Contains(applicationUser.UserName)).FirstOrDefault();
@@ -156,16 +143,10 @@ namespace WebApplication4.Controllers
         public async Task<IActionResult> GetUserInfo()
         {
             string userId = User.Claims.First(c => c.Type == "UserId").Value;
-            var user = await _repoContext.UserModel.Include(x => x.Address).Include(x => x.Address.Districts.City).Include(x => x.Address.Districts)
+            var user = await _repoContext.UserModel
                 .Where(x => x.Id == userId).FirstOrDefaultAsync();
              var _user = _mapper.Map<UserDTO>(user);
-            _user.Address = new AddressGetDTO()
-            {
-                CityId = user.Address.City.CityId,
-                DistrictId = user.Address.Districts.DistrictId,
-                CityName = user.Address.City.CityName,
-                DistrictName = user.Address.Districts.DistrictName
-            };
+            
             if (user.Role == "student")
             {
                 var student = await _repoContext.Students.Include(x => x.StudentCourses).ThenInclude(x => x.Courses).Where(x => x.UserModel.Id == userId)

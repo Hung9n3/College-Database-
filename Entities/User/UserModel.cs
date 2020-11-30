@@ -1,5 +1,4 @@
 ﻿using Entity.Course;
-using Entity.Location;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace Entity.User
         public string FullName { get; set; }
         public DateTime BirthDate { get; set; }
         public int Phone { get; set; }
-        public Address Address { get; set; }
+        public string Address { get; set; }
         [Required(ErrorMessage ="Lack of Role =.=")]
         public string Role { get; set; }
     }

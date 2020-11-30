@@ -57,12 +57,9 @@ namespace College_Database
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddTransient<IRepoCourses, RepoCourses >();
-            services.AddTransient<IRepoCity, RepoCity>();
             services.AddTransient<IRepoTeacher, RepoTeacher>();
             services.AddTransient<IRepoStudent, RepoStudent>();
             services.AddTransient<IRepoDepartment, RepoDepartment>();
-            services.AddTransient<IRepoDistrict, RepoDistrict>();
-            services.AddTransient<IRepoAddress, RepoAddress>();
             services.AddControllers();
             services.AddDbContext<RepoContext>(options =>
                                                 options.UseSqlServer
