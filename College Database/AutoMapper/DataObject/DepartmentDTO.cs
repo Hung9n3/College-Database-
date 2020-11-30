@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace College_Database.AutoMapper.DataObject
 {
-    public class DepartmentDTO : BaseModels
+    public class DepartmentDTO 
     {
+        public int DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
         public ICollection<Courses> Courses { get; set; }
         public ICollection<Teacher> Teachers { get; set; }
     }

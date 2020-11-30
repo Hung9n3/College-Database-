@@ -21,5 +21,9 @@ namespace Repository
             var item = await _repoContext.Teachers.Include(x => x.Courses).FirstOrDefaultAsync(x => x.TeacherId == id);
             return item;
         }
+        public override Task<List<Teacher>> FindAll()
+        {
+            return base.FindAll();
+        }
     }
 }

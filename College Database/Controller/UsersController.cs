@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Entities.StudentCourses;
 using Entity.Course;
+using College_Database.AutoMapper.DataObject.Get;
 
 namespace WebApplication4.Controllers
 {
@@ -96,7 +97,7 @@ namespace WebApplication4.Controllers
                         try
                         {                          
                             var student = new Student();
-                            student.Id = model.StudentId;
+                            student.IdCard = model.StudentId;
                             student.UserModel = user;
                             _repoContext.Students.Add(student);
                             _repoContext.SaveChanges();
@@ -158,6 +159,13 @@ namespace WebApplication4.Controllers
             var user = await _repoContext.UserModel.Include(x => x.Address).Include(x => x.Address.Districts.City).Include(x => x.Address.Districts)
                 .Where(x => x.Id == userId).FirstOrDefaultAsync();
              var _user = _mapper.Map<UserDTO>(user);
+            _user.Address = new AddressGetDTO()
+            {
+                CityId = user.Address.City.CityId,
+                DistrictId = user.Address.Districts.DistrictId,
+                CityName = user.Address.City.CityName,
+                DistrictName = user.Address.Districts.DistrictName
+            };
             if (user.Role == "student")
             {
                 var student = await _repoContext.Students.Include(x => x.StudentCourses).ThenInclude(x => x.Courses).Where(x => x.UserModel.Id == userId)
@@ -170,19 +178,22 @@ namespace WebApplication4.Controllers
                 var teacher = await _repoContext.Teachers.Include(x => x.Department).Include(x => x.Courses).
                     Include(x => x.UserModel).Where(x => x.UserModel.Id == userId).AsNoTracking().FirstOrDefaultAsync();
                 _mapper.Map(teacher, _user);
+                var department = new DepartmentGetDTO();
+                department.DepartmentId = teacher.Department.DepartmentId;
+                department.DepartmentName = teacher.Department.DepartmentName;
+                _user.Department = department;
+            
             }
-            _user.City = user.Address.Districts.City;
-            _user.District = user.Address.Districts;
             return Ok(_user);
         }
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> ApplyCourse(ListCourses listCourses)
+        public async Task<IActionResult> ApplyCourse(List<int> listCourses)
         {
             string userId = User.Claims.First(c => c.Type == "UserId").Value;
             var user = await _userManager.FindByIdAsync(userId);
             var student = await _repoContext.Students.Include(x => x.UserModel).Where(x => x.UserModel.Id == userId).FirstOrDefaultAsync();
-            foreach (int i in listCourses.id)
+            foreach (int i in listCourses)
             {
                 var courses = await _repoCourses.FindByIdAsync(i);
                 var studentcourses = new StudentCourses()

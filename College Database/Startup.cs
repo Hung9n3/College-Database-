@@ -30,12 +30,23 @@ namespace College_Database
         {
             Configuration = configuration;
         }
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+                });
+            });
             //Inject AppSettings
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
             var mapperConfig = new MapperConfiguration(mc =>
@@ -105,6 +116,7 @@ namespace College_Database
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
 

@@ -12,6 +12,8 @@ namespace Entity.User
         public string FullName { get; set; }
         public int Phone { get; set; }
         public Address Address { get;set; }
+        public int CityId { get; set; }
+        public int DistrictId { get; set; }
         public DateTime BirthDate { get; set; }
         public string Role { get; set; }
         public int DepartmentId { get; set; }

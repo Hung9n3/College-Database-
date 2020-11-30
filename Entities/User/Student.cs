@@ -13,8 +13,8 @@ namespace Entity.User
     public class Student 
     {
         [Key]
-        public int StudentID { get; set; }
-        public string Id { get; set; }
+        public int StudentId { get; set; }
+        public string IdCard { get; set; }
         public int Bill { get; set; }
         public bool Paid { get; set; }
         public ICollection<StudentCourses> StudentCourses { get; set; }

@@ -145,7 +145,7 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entity.User.Student", b =>
                 {
-                    b.Property<int>("StudentID")
+                    b.Property<int>("StudentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -153,7 +153,7 @@ namespace Entities.Migrations
                     b.Property<int>("Bill")
                         .HasColumnType("int");
 
-                    b.Property<string>("Id")
+                    b.Property<string>("IdCard")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Paid")
@@ -162,7 +162,7 @@ namespace Entities.Migrations
                     b.Property<string>("UserModelId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("StudentID");
+                    b.HasKey("StudentId");
 
                     b.HasIndex("UserModelId");
 
