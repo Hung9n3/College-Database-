@@ -84,7 +84,7 @@ namespace WebApplication4.Controllers
                         try
                         {                          
                             var student = new Student();
-                            student.IdCard = model.StudentId;
+                            student.IdCard = model.IdCard;
                             student.UserModel = user;
                             _repoContext.Students.Add(student);
                             _repoContext.SaveChanges();

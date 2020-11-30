@@ -12,14 +12,17 @@ namespace College_Database.AutoMapper.DataObject.Post
     {
         public int CoursesId { get; set; }
         public string CoursesName { get; set; }
+        public string Day { get; set; }
         public Department Department { get; set; }
-        public int TeacherId { get; set; }
         public int DepartmentId { get; set; }
+        public int TeacherId { get; set; }
         public Teacher Teacher { get; set; }
         public ICollection<StudentCourses> StudentCourses { get; set; }
-        public int seat { get; set; }
-        public int AvailableSeat { get; set; }
+        public int Size { get; set; }
+        public int Rest { get; set; }
         public int Credits { get; set; }
+        public string Room { get; set; }
+        public int StartPeriod { get; set; }
         public int Periods { get; set; }
     }
 }
