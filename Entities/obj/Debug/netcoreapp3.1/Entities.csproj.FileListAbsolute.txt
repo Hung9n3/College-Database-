@@ -10,3 +10,15 @@ C:\Users\chova\source\repos\College Database\Entities\obj\Debug\netcoreapp3.1\En
 C:\Users\chova\source\repos\College Database\Entities\obj\Debug\netcoreapp3.1\Entities.dll
 C:\Users\chova\source\repos\College Database\Entities\obj\Debug\netcoreapp3.1\Entities.pdb
 C:\Users\chova\source\repos\College Database\Entities\obj\Debug\netcoreapp3.1\Entities.csprojAssemblyReference.cache
+E:\Project\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.deps.json
+E:\Project\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.runtimeconfig.json
+E:\Project\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.runtimeconfig.dev.json
+E:\Project\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.dll
+E:\Project\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.pdb
+E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.csprojAssemblyReference.cache
+E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfoInputs.cache
+E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfo.cs
+E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.csproj.CoreCompileInputs.cache
+E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.dll
+E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.pdb
+E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.genruntimeconfig.cache
