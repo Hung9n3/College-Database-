@@ -5956,19 +5956,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\chova\\.nuget\\packages\\": {}
+    "C:\\Users\\Win 10\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chova\\source\\repos\\College Database\\Entities\\Entities.csproj",
+      "projectUniqueName": "E:\\Project\\College-Database-\\Entities\\Entities.csproj",
       "projectName": "Entities",
-      "projectPath": "C:\\Users\\chova\\source\\repos\\College Database\\Entities\\Entities.csproj",
-      "packagesPath": "C:\\Users\\chova\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chova\\source\\repos\\College Database\\Entities\\obj\\",
+      "projectPath": "E:\\Project\\College-Database-\\Entities\\Entities.csproj",
+      "packagesPath": "C:\\Users\\Win 10\\.nuget\\packages\\",
+      "outputPath": "E:\\Project\\College-Database-\\Entities\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\chova\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

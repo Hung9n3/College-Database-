@@ -33,9 +33,10 @@ namespace College_Database.Controller
         private IRepoTeacher _repoTeacher;
         private IRepoStudent _repoStudent;
         private IRepoCourses _repoCourses;
+        private IRepoDepartment _repoDepartment;
         public CollegeController(IMapper mapper, IRepoStudent repoStudent, IRepoTeacher repoTeacher 
                                 , RepoContext repoContext, UserManager<UserModel> userManager,
-                                SignInManager<UserModel> signInManager, IOptions<ApplicationSettings> appSettings, IRepoCourses repoCourses)
+                                SignInManager<UserModel> signInManager, IOptions<ApplicationSettings> appSettings, IRepoCourses repoCourses,IRepoDepartment repoDepartment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,6 +46,7 @@ namespace College_Database.Controller
             _repoTeacher = repoTeacher;
             _repoStudent = repoStudent;
             _mapper = mapper;
+            _repoDepartment = repoDepartment;
         }
        [HttpPost]
         public async Task<IActionResult> AddDepartment(DepartmentDTO _department)
@@ -80,6 +82,14 @@ namespace College_Database.Controller
             //}
             return items;
         }
+
+        [HttpGet]
+        public async Task<List<Department>> GetDepartments()
+        {
+            var result = await _repoDepartment.FindAll();
+            return result;
+        }
+
         [HttpGet("{id}")]
         public async Task<Courses> GetCoursesById(int id)
         {

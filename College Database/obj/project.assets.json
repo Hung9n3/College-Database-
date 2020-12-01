@@ -5778,19 +5778,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\chova\\.nuget\\packages\\": {}
+    "C:\\Users\\Win 10\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chova\\source\\repos\\College Database\\College Database\\College Database.csproj",
+      "projectUniqueName": "E:\\Project\\College-Database-\\College Database\\College Database.csproj",
       "projectName": "College Database",
-      "projectPath": "C:\\Users\\chova\\source\\repos\\College Database\\College Database\\College Database.csproj",
-      "packagesPath": "C:\\Users\\chova\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chova\\source\\repos\\College Database\\College Database\\obj\\",
+      "projectPath": "E:\\Project\\College-Database-\\College Database\\College Database.csproj",
+      "packagesPath": "C:\\Users\\Win 10\\.nuget\\packages\\",
+      "outputPath": "E:\\Project\\College-Database-\\College Database\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\chova\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5803,11 +5803,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\chova\\source\\repos\\College Database\\Entities\\Entities.csproj": {
-              "projectPath": "C:\\Users\\chova\\source\\repos\\College Database\\Entities\\Entities.csproj"
+            "E:\\Project\\College-Database-\\Entities\\Entities.csproj": {
+              "projectPath": "E:\\Project\\College-Database-\\Entities\\Entities.csproj"
             },
-            "C:\\Users\\chova\\source\\repos\\College Database\\Repository\\Repository.csproj": {
-              "projectPath": "C:\\Users\\chova\\source\\repos\\College Database\\Repository\\Repository.csproj"
+            "E:\\Project\\College-Database-\\Repository\\Repository.csproj": {
+              "projectPath": "E:\\Project\\College-Database-\\Repository\\Repository.csproj"
             }
           }
         }
