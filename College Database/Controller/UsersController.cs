@@ -141,32 +141,24 @@ namespace WebApplication4.Controllers
         }
         [HttpGet]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> GetUserInfo()
+        public async Task<UserDTO> GetUserInfo()
         {
             string userId = User.Claims.First(c => c.Type == "UserId").Value;
             var user = await _repoContext.UserModel
                 .Where(x => x.Id == userId).FirstOrDefaultAsync();
              var _user = _mapper.Map<UserDTO>(user);
-            
-            if (user.Role == "student")
+            if(user.Role == "student")
             {
-                var student = await _repoContext.Students.Include(x => x.StudentCourses).ThenInclude(x => x.Courses).Where(x => x.UserModel.Id == userId)
-                    .AsNoTracking().FirstOrDefaultAsync();
-                _mapper.Map(student, _user);
-                
+                var student = await _repoContext.Students.Include(x => x.StudentCourses).ThenInclude(x => x.Courses).Include(x => x.Department)
+                    .Where(x => x.UserModel.Id == userId).FirstAsync();
+                _mapper.Map(student,_user);
             }
             if(user.Role == "teacher")
             {
-                var teacher = await _repoContext.Teachers.Include(x => x.Department).Include(x => x.Courses).
-                    Include(x => x.UserModel).Where(x => x.UserModel.Id == userId).AsNoTracking().FirstOrDefaultAsync();
+                var teacher = await _repoContext.Teachers.Include(x => x.Courses).Include(x => x.Department).Where(x => x.UserModel.Id == userId).FirstAsync();
                 _mapper.Map(teacher, _user);
-                var department = new DepartmentGetDTO();
-                department.DepartmentId = teacher.Department.DepartmentId;
-                department.DepartmentName = teacher.Department.DepartmentName;
-                _user.Department = department;
-            
             }
-            return Ok(_user);
+            return _user;
         }
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

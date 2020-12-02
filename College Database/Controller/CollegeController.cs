@@ -78,7 +78,14 @@ namespace College_Database.Controller
             }
             return _courses;
         }
-
+        [HttpGet("{id}")]
+        public async Task<CoursesDTO> GetCoursesById(int id)
+        {
+            var course = await _repoContext.Courses.Include(x => x.Teacher).Include(x => x.StudentCourses).ThenInclude(x => x.Student).Include(x => x.Department)
+                .FirstAsync();
+            var _course = _mapper.Map<CoursesDTO>(course);
+            return _course;
+        }
         [HttpGet]
         public async Task<List<Department>> GetDepartments()
         {
@@ -86,12 +93,7 @@ namespace College_Database.Controller
             return result;
         }
 
-        [HttpGet("{id}")]
-        public async Task<Courses> GetCoursesById(int id)
-        {
-            var item = await _repoCourses.FindByIdAsync(id);
-            return item;
-        }
+        
         [HttpPost("{id}")]
         public async Task<IActionResult> TeacherCourses(List<int> listCourses, int id)
         {
@@ -184,20 +186,33 @@ namespace College_Database.Controller
             }
             return _teachers;
         }
-        //[HttpPut]
-        //public async Task<IActionResult> UpdateDepartment(DepartmentPostDTO departmentPostDTO)
-        //{
-        //    //ICollection<Teacher> _teacher;
-        //    var department = await _repoContext.Departments.Include(x => x.Teachers).
-        //        FirstAsync(x => x.DepartmentId == departmentPostDTO.DepartmentId);
-        //    foreach(int i in departmentPostDTO.TeacherId)
-        //    {
-        //        departmentPostDTO.Teachers.Add(await _repoTeacher.FindByIdAsync(i));
-        //    }
-        //    _mapper.Map(departmentPostDTO, department);
-        //    _repoContext.Departments.Update(department);
-        //   await _repoContext.SaveChangesAsync();
-        //    return Ok();
-        //}
+        [HttpPut]
+        public async Task<IActionResult> UpdateUserInfo(ApplicationUserModel _user)
+        {
+            var user = await _repoContext.UserModel.FindAsync(_user.Id);
+            _mapper.Map(_user, user);
+            var department = await _repoContext.Departments.FindAsync(_user.DepartmentId);
+            var _teacher = new Teacher();
+            var _student = new Student();
+            if(user.Role == "teacher")
+            {
+                var teacher = await _repoContext.Teachers.Include(x => x.Department).Where(x => x.UserModel.Id == user.Id).FirstAsync();
+                teacher.Department = department;
+                _mapper.Map(_user, teacher);
+                _teacher = teacher;
+            }
+            if(user.Role == "student")
+            {
+                var student = await _repoContext.Students.Include(x => x.Department).Where(x => x.UserModel.Id == user.Id).FirstAsync();
+                student.Department = department;
+                _mapper.Map(_user, student);
+                _student = student;
+            }
+            _repoContext.Update<Teacher>(_teacher);
+            _repoContext.Update<Student>(_student);
+            _repoContext.Update<UserModel>(user);
+            await _repoContext.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

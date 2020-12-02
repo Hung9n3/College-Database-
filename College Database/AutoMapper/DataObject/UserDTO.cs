@@ -23,6 +23,6 @@ namespace College_Database.AutoMapper.DataObject
         public string Role { get; set; }
         public DateTime BirthDate { get; set; }
         public string Address {get;set;}
-        public ICollection<Courses> Courses { get; set; }
+        public ICollection<CoursesGetDTO> Courses { get; set; }
     }
 }
