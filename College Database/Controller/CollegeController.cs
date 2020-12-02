@@ -166,6 +166,7 @@ namespace College_Database.Controller
         public async Task<List<StudentGetDTO>> GetStudentByDepartment(int id)
         {
             var students = await _repoContext.Students.Include(x => x.Department).Include(x => x.UserModel).Include(x => x.StudentCourses).ThenInclude(x => x.Courses)
+                .ThenInclude(x => x.Teacher)
                 .Where(x => x.Department.DepartmentId == id).ToListAsync();
             List<StudentGetDTO> _students = new List<StudentGetDTO>();
             foreach (Student s in students)

@@ -13,7 +13,7 @@ namespace College_Database.AutoMapper.DataObject
     {
         public int CoursesId { get; set; }
         public string CoursesName { get; set; }
-        public string Day { get; set; }
+        public DayOfWeek Day { get; set; }
         public Department Department { get; set; }
         public TeacherGetDTO Lecturer { get; set; }
         public ICollection<Student> Students { get; set; }

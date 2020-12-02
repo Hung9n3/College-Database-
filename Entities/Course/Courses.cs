@@ -19,7 +19,7 @@ namespace Entity.Course
         public int Credits { get; set; }
         public int Size { get; set; }
         public int Rest { get; set; }
-        public string Day { get; set; }
+        public DayOfWeek Day { get; set; }
         public int StartPeriod { get; set; }
         public int Periods { get; set; }
         public string Room { get; set; }

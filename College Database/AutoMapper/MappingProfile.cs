@@ -20,6 +20,7 @@ namespace College_Database.AutoMapper
             CreateMap<ApplicationUserModel, Teacher>().ForMember(x => x.TeacherId, opt => opt.Ignore());
             CreateMap<UserModel, UserDTO>().ForMember(x => x.Address, opt => opt.Ignore());
             CreateMap<DepartmentDTO, Department>().ForMember(x => x.DepartmentId, opt => opt.Ignore());
+            CreateMap<Department, DepartmentGetDTO>();
             CreateMap<CoursesPostDTO, Courses>().ForMember(x => x.CoursesId, opt => opt.Ignore());
             CreateMap<Courses, CoursesDTO>().ForMember(x => x.Students, c => c.MapFrom(c => c.StudentCourses.Select(cs => cs.Student)));
             CreateMap<Student, UserDTO>()
@@ -27,6 +28,7 @@ namespace College_Database.AutoMapper
             CreateMap<Teacher, UserDTO>().ForMember(x => x.Department, x => x.Ignore());
             CreateMap<Teacher, TeacherDTO>().ForMember(x => x.UserModel, c => c.MapFrom(c => c.UserModel))
                 .ForMember(x => x.Department, c => c.MapFrom(c => c.Department)).ForMember(x => x.Courses, c => c.MapFrom(c => c.Courses));
+            CreateMap<Teacher, TeacherGetDTO>();
             CreateMap<Student, StudentGetDTO>().ForMember(x => x.Courses, c => c.MapFrom(c => c.StudentCourses.Select(cs => cs.Courses)))
                 .ForMember(x => x.UserModel, c => c.MapFrom(c => c.UserModel)).ForMember(x => x.Department, c => c.MapFrom(c => c.Department));
             CreateMap<DepartmentPostDTO, Department>().ForMember(x => x.DepartmentId, opt => opt.Ignore());
