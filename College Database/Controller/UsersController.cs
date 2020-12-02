@@ -60,13 +60,13 @@ namespace WebApplication4.Controllers
             var applicationUser = _mapper.Map<UserModel>(model);
             var result = await _userManager.CreateAsync(applicationUser, model.Password);
             var user = _repoContext.UserModel.Where(x => x.UserName.Contains(applicationUser.UserName)).FirstOrDefault();
+            var department = await _repoContext.Departments.FindAsync(model.DepartmentId);
             switch (applicationUser.Role)
             {
                 case "teacher":
                     {
                         try
                         {
-                            var department = await _repoContext.Departments.FindAsync(model.DepartmentId);
                             var teacher = new Teacher();
                             teacher.Department = department;
                             teacher.UserModel = user;
@@ -86,6 +86,7 @@ namespace WebApplication4.Controllers
                             var student = new Student();
                             student.IdCard = model.IdCard;
                             student.UserModel = user;
+                            student.Department = department;
                             _repoContext.Students.Add(student);
                             _repoContext.SaveChanges();
                             return Ok(result);
@@ -176,16 +177,14 @@ namespace WebApplication4.Controllers
             var student = await _repoContext.Students.Include(x => x.UserModel).Where(x => x.UserModel.Id == userId).FirstOrDefaultAsync();
             foreach (int i in listCourses)
             {
-                var courses = await _repoCourses.FindByIdAsync(i);
+                var courses = await _repoContext.Courses.FindAsync(i);
                 var studentcourses = new StudentCourses()
                 {
                     Courses = courses,
                     Student = student
                 };
                 _repoContext.StudentCourses.Add(studentcourses);
-                student.Bill = student.Bill + courses.Credits * 55;
             }
-            _repoStudent.Update(student);
            await _repoContext.SaveChangesAsync();
             return Ok();
         }

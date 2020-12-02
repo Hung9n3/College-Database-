@@ -5896,19 +5896,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Win 10\\.nuget\\packages\\": {}
+    "C:\\Users\\chova\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Project\\College-Database-\\Repository\\Repository.csproj",
+      "projectUniqueName": "C:\\Users\\chova\\source\\repos\\College-Database-\\Repository\\Repository.csproj",
       "projectName": "Repository",
-      "projectPath": "E:\\Project\\College-Database-\\Repository\\Repository.csproj",
-      "packagesPath": "C:\\Users\\Win 10\\.nuget\\packages\\",
-      "outputPath": "E:\\Project\\College-Database-\\Repository\\obj\\",
+      "projectPath": "C:\\Users\\chova\\source\\repos\\College-Database-\\Repository\\Repository.csproj",
+      "packagesPath": "C:\\Users\\chova\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\chova\\source\\repos\\College-Database-\\Repository\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\chova\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5921,8 +5921,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "E:\\Project\\College-Database-\\Contracts\\Contracts.csproj": {
-              "projectPath": "E:\\Project\\College-Database-\\Contracts\\Contracts.csproj"
+            "C:\\Users\\chova\\source\\repos\\College-Database-\\Contracts\\Contracts.csproj": {
+              "projectPath": "C:\\Users\\chova\\source\\repos\\College-Database-\\Contracts\\Contracts.csproj"
             }
           }
         }

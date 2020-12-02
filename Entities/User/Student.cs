@@ -17,6 +17,7 @@ namespace Entity.User
         public string IdCard { get; set; }
         public int Bill { get; set; }
         public bool Paid { get; set; }
+        public Department Department { get; set; }
         public ICollection<StudentCourses> StudentCourses { get; set; }
         public UserModel UserModel { get; set; }
     }

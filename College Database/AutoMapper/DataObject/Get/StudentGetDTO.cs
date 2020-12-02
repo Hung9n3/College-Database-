@@ -13,7 +13,8 @@ namespace College_Database.AutoMapper.DataObject.Get
         public string IdCard { get; set; }
         public int Bill { get; set; }
         public bool Paid { get; set; }
-        public ICollection<Courses> StudentCourses { get; set; }
+        public DepartmentGetDTO Department {get;set;}
+        public ICollection<CoursesGetDTO> Courses { get; set; }
         public UserDTO UserModel { get; set; }
     }
 }

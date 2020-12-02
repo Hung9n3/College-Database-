@@ -22,3 +22,15 @@ E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.csproj.Co
 E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.dll
 E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.pdb
 E:\Project\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.genruntimeconfig.cache
+C:\Users\chova\source\repos\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.deps.json
+C:\Users\chova\source\repos\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.runtimeconfig.json
+C:\Users\chova\source\repos\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.runtimeconfig.dev.json
+C:\Users\chova\source\repos\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.dll
+C:\Users\chova\source\repos\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.pdb
+C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfoInputs.cache
+C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfo.cs
+C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.csproj.CoreCompileInputs.cache
+C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.dll
+C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.pdb
+C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.genruntimeconfig.cache
+C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.csprojAssemblyReference.cache
