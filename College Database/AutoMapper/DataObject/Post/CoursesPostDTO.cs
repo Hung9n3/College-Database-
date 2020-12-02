@@ -12,7 +12,7 @@ namespace College_Database.AutoMapper.DataObject.Post
     {
         public int CoursesId { get; set; }
         public string CoursesName { get; set; }
-        public string Day { get; set; }
+        public DayOfWeek Day { get; set; }
         public Department Department { get; set; }
         public int DepartmentId { get; set; }
         public int TeacherId { get; set; }

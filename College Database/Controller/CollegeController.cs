@@ -49,38 +49,34 @@ namespace College_Database.Controller
             _repoDepartment = repoDepartment;
         }
        [HttpPost]
-        public async Task<IActionResult> AddDepartment(DepartmentDTO _department)
+        public async Task<IActionResult> AddDepartment(DepartmentPostDTO _department)
         {
             var department = _mapper.Map<Department>(_department);
             _repoContext.Add(department);
             await _repoContext.SaveChangesAsync();
             return Ok();
         }
-        [HttpPost("{id}")]
-        public async Task<IActionResult> AddCourses(CoursesPostDTO _course, int id)
+        [HttpPost]
+        public async Task<IActionResult> AddCourses(CoursesPostDTO _course)
         {
-            var department = await _repoContext.Departments.FindAsync(id);
+            var department = await _repoContext.Departments.FindAsync(_course.DepartmentId);
+            var teacher = await _repoContext.Teachers.FindAsync(_course.TeacherId);
             _course.Department = department;
+            _course.Teacher = teacher;
             _repoContext.Add(_mapper.Map<Courses>(_course));
             await _repoContext.SaveChangesAsync();
             return Ok();
         }
         [HttpGet]
-        public async Task<List<Courses>> GetAllCourses()
+        public async Task<List<CoursesDTO>> GetAllCourses()
         {
             var items = await _repoCourses.FindAll();
-            //var _items = new List<CoursesDTO>();
-            //var item = new CoursesDTO();
-            //var teacher = new TeacherGetDTO();
-            //foreach (Courses i in items)
-            //{
-            //    item = _mapper.Map<CoursesDTO>(i);
-            //    teacher.TeacherId = i.Teacher.TeacherId;
-            //    teacher.TeacherName = i.Teacher.UserModel.FullName;
-            //    item.Lecturer = teacher;
-            //    _items.Add(item);
-            //}
-            return items;
+            List<CoursesDTO> _courses = new List<CoursesDTO>(); 
+            foreach(Courses c in items)
+            {
+                _courses.Add(_mapper.Map<CoursesDTO>(c));
+            }
+            return _courses;
         }
 
         [HttpGet]
@@ -151,27 +147,27 @@ namespace College_Database.Controller
             return Ok();
         }
         [HttpGet]
-        public async Task<List<StudentGetDTO>> GetAllStudent()
+        public async Task<List<StudentDTO>> GetAllStudent()
         {
             var students = await _repoStudent.FindAll();
-            List<StudentGetDTO> _students = new List<StudentGetDTO>();
+            List<StudentDTO> _students = new List<StudentDTO>();
             foreach(Student s in students)
             {
-                var _student = _mapper.Map<StudentGetDTO>(s);
+                var _student = _mapper.Map<StudentDTO>(s);
                 _students.Add(_student);
             }
             return _students;
         }
         [HttpGet("{id}")]
-        public async Task<List<StudentGetDTO>> GetStudentByDepartment(int id)
+        public async Task<List<StudentDTO>> GetStudentByDepartment(int id)
         {
             var students = await _repoContext.Students.Include(x => x.Department).Include(x => x.UserModel).Include(x => x.StudentCourses).ThenInclude(x => x.Courses)
                 .ThenInclude(x => x.Teacher)
                 .Where(x => x.Department.DepartmentId == id).ToListAsync();
-            List<StudentGetDTO> _students = new List<StudentGetDTO>();
+            List<StudentDTO> _students = new List<StudentDTO>();
             foreach (Student s in students)
             {
-                var _student = _mapper.Map<StudentGetDTO>(s);
+                var _student = _mapper.Map<StudentDTO>(s);
                 _students.Add(_student);
             }
             return _students;

@@ -29,11 +29,12 @@ namespace College_Database.AutoMapper
             CreateMap<Teacher, TeacherDTO>().ForMember(x => x.UserModel, c => c.MapFrom(c => c.UserModel))
                 .ForMember(x => x.Department, c => c.MapFrom(c => c.Department)).ForMember(x => x.Courses, c => c.MapFrom(c => c.Courses));
             CreateMap<Teacher, TeacherGetDTO>();
-            CreateMap<Student, StudentGetDTO>().ForMember(x => x.Courses, c => c.MapFrom(c => c.StudentCourses.Select(cs => cs.Courses)))
+            CreateMap<Student, StudentDTO>().ForMember(x => x.Courses, c => c.MapFrom(c => c.StudentCourses.Select(cs => cs.Courses)))
                 .ForMember(x => x.UserModel, c => c.MapFrom(c => c.UserModel)).ForMember(x => x.Department, c => c.MapFrom(c => c.Department));
             CreateMap<DepartmentPostDTO, Department>().ForMember(x => x.DepartmentId, opt => opt.Ignore());
             CreateMap<Department, DepartmentGetDTO>();
             CreateMap<Courses, CoursesGetDTO>();
+            CreateMap<Student, StudentGetDTO>();
         }
     }
 }

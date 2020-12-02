@@ -1,4 +1,5 @@
 ﻿using College_Database.AutoMapper.DataObject.Get;
+using Entities.StudentCourses;
 using Entity.BaseModel;
 using Entity.Course;
 using Entity.User;
@@ -14,9 +15,9 @@ namespace College_Database.AutoMapper.DataObject
         public int CoursesId { get; set; }
         public string CoursesName { get; set; }
         public DayOfWeek Day { get; set; }
-        public Department Department { get; set; }
-        public TeacherGetDTO Lecturer { get; set; }
-        public ICollection<Student> Students { get; set; }
+        public DepartmentGetDTO Department { get; set; }
+        public TeacherGetDTO Teacher { get; set; }
+        public ICollection<StudentGetDTO> Students { get; set; }
         public int Size { get; set; }
         public int Rest { get; set; }
         public int Credits { get; set; }
