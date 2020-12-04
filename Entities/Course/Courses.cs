@@ -23,6 +23,7 @@ namespace Entity.Course
         public int StartPeriod { get; set; }
         public int Periods { get; set; }
         public string Room { get; set; }
+        public int DepartmentId { get; set; }
         public Department Department { get; set; }
         public ICollection<StudentCourses> StudentCourses { get; set; }
     }

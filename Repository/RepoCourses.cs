@@ -5,6 +5,7 @@ using Entity.User;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace Repository
         }
         public override async Task<Courses> FindByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            var item = await _repoContext.Courses.Include(x => x.Teacher).Include(x => x.Department).AsNoTracking().FirstOrDefaultAsync();
+            var item = await _repoContext.Courses.Include(x => x.Teacher).Include(x => x.Department).Where(x => x.CoursesId == id).FirstAsync();
             return item;
         }
     }

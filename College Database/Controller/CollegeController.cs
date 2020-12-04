@@ -147,7 +147,7 @@ namespace College_Database.Controller
             _courses.Department = department;
             var course = await _repoCourses.FindByIdAsync(_courses.CoursesId);
             _mapper.Map(_courses, course);
-            _repoCourses.Update(course);
+            _repoContext.Courses.Update(course);
             await _repoCourses.SaveChangesAsync();
             return Ok();
         }
