@@ -158,6 +158,8 @@ namespace WebApplication4.Controllers
                 var teacher = await _repoContext.Teachers.Include(x => x.Courses).Include(x => x.Department).Where(x => x.UserModel.Id == userId).FirstAsync();
                 _mapper.Map(teacher, _user);
             }
+           IEnumerable<CoursesGetDTO> _course =  _user.Courses.OrderBy(x => x.Day).OrderBy(x => x.StartPeriod);
+           _user.Courses = _course.ToList();
             return _user;
         }
         [HttpPost]

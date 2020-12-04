@@ -18,7 +18,7 @@ namespace Repository
         }
         public override async Task<List<Courses>> FindAll()
         {
-            var items = await _repoContext.Courses.Include(x => x.StudentCourses).ThenInclude(x => x.Student).Include(x => x.Teacher)
+            var items = await _repoContext.Courses.Include(x => x.StudentCourses).ThenInclude(x => x.Student).Include(x => x.Teacher).ThenInclude(x => x.UserModel)
                                             .Include(x => x.Department).AsNoTracking().ToListAsync();
             return items;
         }

@@ -74,16 +74,19 @@ namespace College_Database.Controller
             List<CoursesDTO> _courses = new List<CoursesDTO>(); 
             foreach(Courses c in items)
             {
-                _courses.Add(_mapper.Map<CoursesDTO>(c));
+                var course = _mapper.Map<CoursesDTO>(c);
+                course.Teacher.TeacherName = c.Teacher.UserModel.FullName;
+                _courses.Add(course);
             }
             return _courses;
         }
         [HttpGet("{id}")]
         public async Task<CoursesDTO> GetCoursesById(int id)
         {
-            var course = await _repoContext.Courses.Include(x => x.Teacher).Include(x => x.StudentCourses).ThenInclude(x => x.Student).Include(x => x.Department)
-                .FirstAsync();
+            var course = await _repoContext.Courses.Include(x => x.Teacher).ThenInclude(x => x.UserModel).Include(x => x.StudentCourses).ThenInclude(x => x.Student).Include(x => x.Department)
+                .Where(x => x.CoursesId == id).FirstAsync();
             var _course = _mapper.Map<CoursesDTO>(course);
+            _course.Teacher.TeacherName = course.Teacher.UserModel.FullName;
             return _course;
         }
         [HttpGet]
