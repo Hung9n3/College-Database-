@@ -16,9 +16,8 @@ namespace Contracts
         Task<List<T>> FindAll();
         Task<T> FindByIdAsync(int id, CancellationToken cancellationToken = default);
         void Create(T entities);
-        void Delete(int id);
         void Update(T entity);
-        void DeleteManyItem(List<int> list);
+        Task Delete(List<int> list);
         Task SaveChangesAsync(CancellationToken cancellationToken = default);
         Task<IDbContextTransaction> BeginTransactionAsync();
     }

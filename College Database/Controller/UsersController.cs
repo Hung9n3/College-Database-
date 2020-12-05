@@ -61,55 +61,59 @@ namespace WebApplication4.Controllers
             var result = await _userManager.CreateAsync(applicationUser, model.Password);
             var user = _repoContext.UserModel.Where(x => x.UserName.Contains(applicationUser.UserName)).FirstOrDefault();
             var department = await _repoContext.Departments.FindAsync(model.DepartmentId);
-            switch (applicationUser.Role)
+            if (result.Succeeded == true)
             {
-                case "teacher":
-                    {
-                        try
+                switch (applicationUser.Role)
+                {
+                    case "teacher":
                         {
-                            var teacher = new Teacher();
-                            teacher.Department = department;
-                            teacher.UserModel = user;
-                            _repoContext.Teachers.Add(teacher);
-                            _repoContext.SaveChanges();
-                            return Ok(result);
+                            try
+                            {
+                                var teacher = new Teacher();
+                                teacher.Department = department;
+                                teacher.UserModel = user;
+                                _repoContext.Teachers.Add(teacher);
+                                _repoContext.SaveChanges();
+                                return Ok(result);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
                         }
-                        catch (Exception ex)
+                    case "student":
                         {
-                            throw ex;
+                            try
+                            {
+                                var student = new Student();
+                                student.IdCard = model.IdCard;
+                                student.UserModel = user;
+                                student.Department = department;
+                                _repoContext.Students.Add(student);
+                                _repoContext.SaveChanges();
+                                return Ok(result);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
                         }
-                    }
-                case "student":
-                    {
-                        try
-                        {                          
-                            var student = new Student();
-                            student.IdCard = model.IdCard;
-                            student.UserModel = user;
-                            student.Department = department;
-                            _repoContext.Students.Add(student);
-                            _repoContext.SaveChanges();
-                            return Ok(result);
-                        }
-                        catch (Exception ex)
+                    case "admin":
                         {
-                            throw ex;
+                            try
+                            {
+                                return Ok(result);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
                         }
-                    }
-                case "admin":
-                    {
-                        try
-                        {                          
-                            return Ok(result);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
-                    }
-                default:
-                    return BadRequest("Lack of role !!");
+                    default:
+                        return BadRequest("Lack of role !!");
+                }
             }
+            else return result;
         }
 
         [HttpPost]
@@ -158,7 +162,7 @@ namespace WebApplication4.Controllers
                 var teacher = await _repoContext.Teachers.Include(x => x.Courses).Include(x => x.Department).Where(x => x.UserModel.Id == userId).FirstAsync();
                 _mapper.Map(teacher, _user);
             }
-           IEnumerable<CoursesGetDTO> _course =  _user.Courses.OrderBy(x => x.Day).OrderBy(x => x.StartPeriod);
+           IEnumerable<CoursesGetDTO> _course =  _user.Courses.OrderBy(x => x.Day).ThenBy(x => x.StartPeriod);
            _user.Courses = _course.ToList();
             return _user;
         }

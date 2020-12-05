@@ -30,11 +30,7 @@ namespace Repository
             _dbSet.Add(entities);
         }
 
-        public async void Delete(int id)
-        {
-            var item = await _dbSet.FindAsync(id);
-            _dbSet.Remove(item);
-        }
+       
 
         public virtual async Task<List<T>> FindAll()
         {
@@ -53,7 +49,7 @@ namespace Repository
            await _repoContext.SaveChangesAsync();
             
         }
-        public async void DeleteManyItem(List<int> list)
+        public async Task Delete(List<int> list)
         {
             foreach(int i in list)
             {

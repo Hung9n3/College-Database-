@@ -86,7 +86,10 @@ namespace College_Database.Controller
             var course = await _repoContext.Courses.Include(x => x.Teacher).ThenInclude(x => x.UserModel).Include(x => x.StudentCourses).ThenInclude(x => x.Student).Include(x => x.Department)
                 .Where(x => x.CoursesId == id).FirstAsync();
             var _course = _mapper.Map<CoursesDTO>(course);
-            _course.Teacher.TeacherName = course.Teacher.UserModel.FullName;
+            if (course.Teacher.UserModel.FullName != null)
+            {
+                _course.Teacher.TeacherName = course.Teacher.UserModel.FullName;
+            }
             return _course;
         }
         [HttpGet]
@@ -217,5 +220,13 @@ namespace College_Database.Controller
             await _repoContext.SaveChangesAsync();
             return Ok();
         }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCourse(List<int> id)
+        {
+           await _repoCourses.Delete(id);
+            await _repoCourses.SaveChangesAsync();
+            return Ok();
+        }
+        
     }
 }
