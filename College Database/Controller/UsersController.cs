@@ -176,11 +176,13 @@ namespace WebApplication4.Controllers
             foreach (int i in listCourses)
             {
                 var courses = await _repoContext.Courses.FindAsync(i);
+                courses.Rest = courses.Rest - 1;
                 var studentcourses = new StudentCourses()
                 {
                     Courses = courses,
                     Student = student
                 };
+                _repoCourses.Update(courses);
                 _repoContext.StudentCourses.Add(studentcourses);
             }
            await _repoContext.SaveChangesAsync();

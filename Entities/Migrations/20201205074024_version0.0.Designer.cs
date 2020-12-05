@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepoContext))]
-    [Migration("20201204122812_ver 1")]
-    partial class ver1
+    [Migration("20201205074024_version0.0")]
+    partial class version00
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

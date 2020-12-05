@@ -19,13 +19,14 @@ namespace Repository
         }
         public override async Task<List<Courses>> FindAll()
         {
-            var items = await _repoContext.Courses.Include(x => x.StudentCourses).ThenInclude(x => x.Student).Include(x => x.Teacher).ThenInclude(x => x.UserModel)
+            var items = await _repoContext.Courses.Include(x => x.Teacher).ThenInclude(x => x.UserModel)
                                             .Include(x => x.Department).AsNoTracking().ToListAsync();
             return items;
         }
         public override async Task<Courses> FindByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            var item = await _repoContext.Courses.Include(x => x.Teacher).Include(x => x.Department).Where(x => x.CoursesId == id).FirstAsync();
+            var item = await _repoContext.Courses.Include(x => x.Teacher).ThenInclude(x => x.UserModel).Include(x => x.Department).Include(x => x.StudentCourses)
+                .ThenInclude(x => x.Student).ThenInclude(x => x.UserModel).Where(x => x.CoursesId == id).FirstAsync();
             return item;
         }
     }

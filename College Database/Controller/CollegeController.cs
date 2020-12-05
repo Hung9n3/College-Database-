@@ -63,6 +63,7 @@ namespace College_Database.Controller
             var teacher = await _repoContext.Teachers.FindAsync(_course.TeacherId);
             _course.Department = department;
             _course.Teacher = teacher;
+            _course.Rest = _course.Size;
             _repoContext.Add(_mapper.Map<Courses>(_course));
             await _repoContext.SaveChangesAsync();
             return Ok();
@@ -83,7 +84,8 @@ namespace College_Database.Controller
         [HttpGet("{id}")]
         public async Task<CoursesDTO> GetCoursesById(int id)
         {
-            var course = await _repoContext.Courses.Include(x => x.Teacher).ThenInclude(x => x.UserModel).Include(x => x.StudentCourses).ThenInclude(x => x.Student).Include(x => x.Department)
+            var course = await _repoContext.Courses.Include(x => x.Teacher).ThenInclude(x => x.UserModel).
+                Include(x => x.StudentCourses).ThenInclude(x => x.Student).ThenInclude(x => x.UserModel).Include(x => x.Department)
                 .Where(x => x.CoursesId == id).FirstAsync();
             var _course = _mapper.Map<CoursesDTO>(course);
             if (course.Teacher.UserModel.FullName != null)

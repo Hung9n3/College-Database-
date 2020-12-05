@@ -167,7 +167,6 @@ C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcore
 C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.pdb
 C:\Users\chova\source\repos\College-Database-\College Database\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\chova\source\repos\College-Database-\College Database\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\chova\source\repos\College-Database-\College Database\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\chova\source\repos\College-Database-\College Database\bin\Debug\netcoreapp3.1\College Database.exe
 C:\Users\chova\source\repos\College-Database-\College Database\bin\Debug\netcoreapp3.1\College Database.deps.json
 C:\Users\chova\source\repos\College-Database-\College Database\bin\Debug\netcoreapp3.1\College Database.runtimeconfig.json
@@ -238,3 +237,4 @@ C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcore
 C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcoreapp3.1\staticwebassets\College Database.StaticWebAssets.Manifest.cache
 C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcoreapp3.1\staticwebassets\College Database.StaticWebAssets.xml
 C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.genruntimeconfig.cache
+C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcoreapp3.1\scopedcss\bundle\College Database.styles.css
