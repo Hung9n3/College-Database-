@@ -5878,19 +5878,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\chova\\.nuget\\packages\\": {}
+    "C:\\Users\\Win 10\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chova\\source\\repos\\College-Database-\\Contracts\\Contracts.csproj",
+      "projectUniqueName": "E:\\Project\\College-Database-\\Contracts\\Contracts.csproj",
       "projectName": "Contracts",
-      "projectPath": "C:\\Users\\chova\\source\\repos\\College-Database-\\Contracts\\Contracts.csproj",
-      "packagesPath": "C:\\Users\\chova\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chova\\source\\repos\\College-Database-\\Contracts\\obj\\",
+      "projectPath": "E:\\Project\\College-Database-\\Contracts\\Contracts.csproj",
+      "packagesPath": "C:\\Users\\Win 10\\.nuget\\packages\\",
+      "outputPath": "E:\\Project\\College-Database-\\Contracts\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\chova\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5902,10 +5902,9 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\chova\\source\\repos\\College-Database-\\Entities\\Entities.csproj": {
-              "projectPath": "C:\\Users\\chova\\source\\repos\\College-Database-\\Entities\\Entities.csproj"
+            "E:\\Project\\College-Database-\\Entities\\Entities.csproj": {
+              "projectPath": "E:\\Project\\College-Database-\\Entities\\Entities.csproj"
             }
           }
         }
@@ -5918,7 +5917,6 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "targetAlias": "netcoreapp3.1",
         "imports": [
           "net461",
           "net462",
@@ -5934,7 +5932,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

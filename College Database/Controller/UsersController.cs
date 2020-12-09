@@ -156,14 +156,17 @@ namespace WebApplication4.Controllers
                 var student = await _repoContext.Students.Include(x => x.StudentCourses).ThenInclude(x => x.Courses).Include(x => x.Department)
                     .Where(x => x.UserModel.Id == userId).FirstAsync();
                 _mapper.Map(student,_user);
+                IEnumerable<CoursesGetDTO> _course = _user.Courses.OrderBy(x => x.Day).ThenBy(x => x.StartPeriod);
+                _user.Courses = _course.ToList();
             }
             if(user.Role == "teacher")
             {
                 var teacher = await _repoContext.Teachers.Include(x => x.Courses).Include(x => x.Department).Where(x => x.UserModel.Id == userId).FirstAsync();
                 _mapper.Map(teacher, _user);
+
+                IEnumerable<CoursesGetDTO> _course = _user.Courses.OrderBy(x => x.Day).ThenBy(x => x.StartPeriod);
+                _user.Courses = _course.ToList();
             }
-           IEnumerable<CoursesGetDTO> _course =  _user.Courses.OrderBy(x => x.Day).ThenBy(x => x.StartPeriod);
-           _user.Courses = _course.ToList();
             return _user;
         }
         [HttpPost]
