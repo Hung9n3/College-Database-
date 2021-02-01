@@ -23,6 +23,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Entities.StudentCourses;
 using Entity.Course;
 using College_Database.AutoMapper.DataObject.Get;
+using System.IO;
+using ExcelDataReader;
+using Microsoft.AspNetCore.Hosting;
 
 namespace WebApplication4.Controllers
 {
@@ -38,9 +41,13 @@ namespace WebApplication4.Controllers
         private IRepoTeacher _repoTeacher;
         private IRepoStudent _repoStudent;
         private IRepoCourses _repoCourses;
+        private readonly IWebHostEnvironment _environment;
+        public string path { get; set; }
+
+
         public UserController(IMapper mapper,IRepoStudent repoStudent,IRepoTeacher repoTeacher,
               RepoContext repoContext,UserManager<UserModel> userManager, 
-            SignInManager<UserModel> signInManager, IOptions<ApplicationSettings> appSettings, IRepoCourses repoCourses)
+            SignInManager<UserModel> signInManager, IOptions<ApplicationSettings> appSettings, IRepoCourses repoCourses, IWebHostEnvironment environment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -50,6 +57,7 @@ namespace WebApplication4.Controllers
             _repoCourses = repoCourses;
             _repoStudent = repoStudent;
             _mapper = mapper;
+            _environment = environment;
         }
         
        
@@ -190,6 +198,119 @@ namespace WebApplication4.Controllers
             }
            await _repoContext.SaveChangesAsync();
             return Ok();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UploadStudent(IFormFile file)
+        {
+            await UploadAsync(file);
+
+            var fileName = path;
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+            using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
+            {
+
+                IExcelDataReader reader;
+
+                reader = ExcelReaderFactory.CreateReader(stream);
+
+                var conf = new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+                var dataSet = reader.AsDataSet(conf);
+
+                var dataTable = dataSet.Tables[0];
+
+
+                for (var i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    ApplicationUserModel user = new ApplicationUserModel
+                    {
+                        UserName = dataTable.Rows[i][0].ToString(),
+                        FullName = dataTable.Rows[i][1].ToString(),
+                        Password = "123456",
+                        Phone = Int32.Parse(dataTable.Rows[i][2].ToString()),
+                        Address = dataTable.Rows[i][3].ToString(),
+                        Role = "student",
+                        DepartmentId = _repoContext.Departments.Where(x => x.DepartmentName == dataTable.Rows[i][5].ToString()).FirstOrDefault().DepartmentId,
+                        BirthDate = DateTime.Parse(dataTable.Rows[i][4].ToString()),
+                        IdCard = dataTable.Rows[i][0].ToString(),
+                    };
+
+                    var result = await Register(user);
+
+                }
+
+            }
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadTeacher(IFormFile file)
+        {
+            await UploadAsync(file);
+
+            var fileName = path;
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+            using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
+            {
+
+                IExcelDataReader reader;
+
+                reader = ExcelReaderFactory.CreateReader(stream);
+
+                var conf = new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+                var dataSet = reader.AsDataSet(conf);
+
+                var dataTable = dataSet.Tables[0];
+
+
+                for (var i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    ApplicationUserModel user = new ApplicationUserModel
+                    {
+                        UserName = dataTable.Rows[i][0].ToString(),
+                        FullName = dataTable.Rows[i][1].ToString(),
+                        Password = "123456",
+                        Phone = Int32.Parse(dataTable.Rows[i][2].ToString()),
+                        Address = dataTable.Rows[i][3].ToString(),
+                        Role = "teacher",
+                        DepartmentId = _repoContext.Departments.Where(x => x.DepartmentName == dataTable.Rows[i][4].ToString()).FirstOrDefault().DepartmentId,
+                        BirthDate = DateTime.Parse(dataTable.Rows[i][5].ToString())
+                    };
+
+                    var result = await Register(user);
+
+                }
+
+            }
+            return Ok();
+        }
+
+        private async Task UploadAsync(IFormFile fileEntry)
+        {
+            path = Path.Combine(_environment.ContentRootPath, "Upload", fileEntry.Name);
+            var ms = new MemoryStream();
+            await fileEntry.CopyToAsync(ms);
+            using (FileStream file = new FileStream(path, FileMode.Create, FileAccess.Write))
+            {
+                ms.WriteTo(file);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,13 +12,16 @@ using Entities.User;
 using Entity.Context;
 using Entity.Course;
 using Entity.User;
+using ExcelDataReader;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using OfficeOpenXml;
 
 namespace College_Database.Controller
 {
@@ -34,9 +38,11 @@ namespace College_Database.Controller
         private IRepoStudent _repoStudent;
         private IRepoCourses _repoCourses;
         private IRepoDepartment _repoDepartment;
+        private readonly IWebHostEnvironment _environment;
+        public string path { get; set; }
         public CollegeController(IMapper mapper, IRepoStudent repoStudent, IRepoTeacher repoTeacher 
                                 , RepoContext repoContext, UserManager<UserModel> userManager,
-                                SignInManager<UserModel> signInManager, IOptions<ApplicationSettings> appSettings, IRepoCourses repoCourses,IRepoDepartment repoDepartment)
+                                SignInManager<UserModel> signInManager, IOptions<ApplicationSettings> appSettings, IRepoCourses repoCourses,IRepoDepartment repoDepartment,IWebHostEnvironment environment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -47,10 +53,19 @@ namespace College_Database.Controller
             _repoStudent = repoStudent;
             _mapper = mapper;
             _repoDepartment = repoDepartment;
+            _environment = environment;
         }
        [HttpPost]
         public async Task<IActionResult> AddDepartment(DepartmentPostDTO _department)
         {
+            var check = await _repoContext.Departments.ToListAsync();
+            foreach(Department c in check)
+            {
+                if(c.DepartmentName ==_department.DepartmentName)
+                {
+                    return Ok("Duplicate department name");
+                }
+            }
             var department = _mapper.Map<Department>(_department);
             _repoContext.Add(department);
             await _repoContext.SaveChangesAsync();
@@ -97,7 +112,7 @@ namespace College_Database.Controller
         [HttpGet]
         public async Task<List<Department>> GetDepartments()
         {
-            var result = await _repoDepartment.FindAll();
+            var result = await _repoContext.Departments.Include(x => x.Courses).Include(x=>x.Teachers).Include(x=>x.Students).ToListAsync();
             return result;
         }
 
@@ -229,6 +244,190 @@ namespace College_Database.Controller
             await _repoCourses.SaveChangesAsync();
             return Ok();
         }
-        
+
+
+
+        private async Task UploadAsync(IFormFile fileEntry)
+        {
+            path = Path.Combine(_environment.ContentRootPath, "Upload", fileEntry.Name);
+            var ms = new MemoryStream();
+            await fileEntry.CopyToAsync(ms);
+            using (FileStream file = new FileStream(path, FileMode.Create, FileAccess.Write))
+            {
+                ms.WriteTo(file);
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UploadDepartment(IFormFile file)
+        {
+            await UploadAsync(file);
+
+            var fileName = path;
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+            using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
+            {
+
+                IExcelDataReader reader;
+
+                reader = ExcelReaderFactory.CreateReader(stream);
+
+                var conf = new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+                var dataSet = reader.AsDataSet(conf);
+
+                var dataTable = dataSet.Tables[0];
+
+
+                for (var i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    DepartmentPostDTO department = new DepartmentPostDTO
+                    {
+                        DepartmentName = dataTable.Rows[i][1].ToString(),
+                    };
+
+                    var result = await AddDepartment(department);
+
+                }
+
+            }
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadCourse(IFormFile file)
+        {
+            await UploadAsync(file);
+
+            var fileName = path;
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+            using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
+            {
+
+                IExcelDataReader reader;
+
+                reader = ExcelReaderFactory.CreateReader(stream);
+
+                var conf = new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                };
+
+                var dataSet = reader.AsDataSet(conf);
+
+                var dataTable = dataSet.Tables[0];
+
+
+                for (var i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    DayOfWeek dof = DayOfWeek.Monday;
+                    switch (dataTable.Rows[i][6].ToString())
+                    {
+                        case "Monday":
+                            dof = DayOfWeek.Monday;
+                            break;
+                        case "Tuesday":
+                            dof = DayOfWeek.Tuesday;
+                            break;
+                        case "Wednesday":
+                            dof = DayOfWeek.Wednesday;
+                            break;
+                        case "Thursday":
+                            dof = DayOfWeek.Thursday;
+                            break;
+                        case "Friday":
+                            dof = DayOfWeek.Friday;
+                            break;
+                        case "Saturday":
+                            dof = DayOfWeek.Saturday;
+                            break;
+                    }
+                    CoursesPostDTO course = new CoursesPostDTO
+                    {
+                        CoursesName = dataTable.Rows[i][1].ToString(),
+                        DepartmentId = _repoContext.Departments.Where(x => x.DepartmentName == dataTable.Rows[i][2].ToString()).FirstOrDefault().DepartmentId,
+                        TeacherId =   _repoContext.Teachers.Include(x => x.UserModel).Include(x => x.Department).Where(x => x.UserModel.FullName == dataTable.Rows[i][3].
+                        ToString() && x.Department.DepartmentId == _repoContext.Departments.Where(x => x.DepartmentName == dataTable.Rows[i][2].ToString()).FirstOrDefault().DepartmentId).FirstOrDefault().TeacherId,
+                        Credits = Int32.Parse(dataTable.Rows[i][4].ToString()),
+                        Size = Int32.Parse(dataTable.Rows[i][5].ToString()),
+                        Day = dof,
+                        StartPeriod = Int32.Parse(dataTable.Rows[i][7].ToString()),
+                        Periods = Int32.Parse(dataTable.Rows[i][8].ToString()),
+                        Room = dataTable.Rows[i][9].ToString(),
+                    };
+
+                    var result = await AddCourses(course);
+
+                }
+
+            }
+            return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ExportExcel(int id)
+        {
+            byte[] fileContents;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (var package = new ExcelPackage())
+            {
+                // Set author for excel file
+                package.Workbook.Properties.Author = "Aspodel";
+                // Set title for excel file
+                package.Workbook.Properties.Title = "Student List";
+                // Add comment to excel file
+                package.Workbook.Properties.Comments = "Hello (^_^)";
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+                worksheet.Cells[1, 1].Value = "No";
+                worksheet.Cells[1, 2].Value = "Student Name";
+                worksheet.Cells[1, 3].Value = "Id Card";
+                worksheet.Cells[1, 4].Value = "Birthdate";
+
+                // Style for Excel 
+                worksheet.DefaultColWidth = 12;
+                worksheet.Column(2).Width = 35;
+                worksheet.Cells.Style.Font.Size = 16;
+
+
+                //Export Data from Table employees
+
+                var studentList =  GetCoursesById(id).Result.Students;
+                var list = studentList.ToList();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var item = list[i];
+                    worksheet.Cells[i + 2, 1].Value = i + 1;
+                    worksheet.Cells[i + 2, 2].Value = item.UserModel.FullName;
+                    worksheet.Cells[i + 2, 3].Value = item.IdCard;
+                    worksheet.Cells[i + 2, 4].Value = item.UserModel.BirthDate.ToString("MM/dd/yyyy");
+                }
+
+                fileContents = package.GetAsByteArray();
+            }
+
+            if (fileContents == null || fileContents.Length == 0)
+            {
+                return NoContent();
+            }
+
+            return File(
+                fileContents: fileContents,
+                contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                fileDownloadName: "Students.xlsx");
+        }
+
     }
 }

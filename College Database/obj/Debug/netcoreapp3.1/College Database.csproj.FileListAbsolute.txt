@@ -149,8 +149,6 @@ E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\Contracts.
 E:\Project\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.csprojAssemblyReference.cache
 E:\Project\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.AssemblyInfoInputs.cache
 E:\Project\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.AssemblyInfo.cs
-E:\Project\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.csproj.CoreCompileInputs.cache
-E:\Project\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.MvcApplicationPartsAssemblyInfo.cache
 E:\Project\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.RazorTargetAssemblyInfo.cache
 E:\Project\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.csproj.CopyComplete
 E:\Project\College-Database-\College Database\obj\Debug\netcoreapp3.1\staticwebassets\College Database.StaticWebAssets.Manifest.cache
@@ -238,3 +236,26 @@ C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcore
 C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcoreapp3.1\staticwebassets\College Database.StaticWebAssets.xml
 C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.genruntimeconfig.cache
 C:\Users\chova\source\repos\College-Database-\College Database\obj\Debug\netcoreapp3.1\scopedcss\bundle\College Database.styles.css
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\ExcelDataReader.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\ExcelDataReader.DataSet.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\EPPlus.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\Microsoft.IO.RecyclableMemoryStream.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\System.Formats.Asn1.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Cng.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Pkcs.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Cng.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll
+E:\Project\College-Database-\College Database\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
+E:\Project\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.csproj.CoreCompileInputs.cache
+E:\Project\College-Database-\College Database\obj\Debug\netcoreapp3.1\College Database.MvcApplicationPartsAssemblyInfo.cache
