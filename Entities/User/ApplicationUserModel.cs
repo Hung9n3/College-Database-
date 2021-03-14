@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entity.User
 {
@@ -18,5 +16,6 @@ namespace Entity.User
         public bool IsHead { get; set; }
         public int DepartmentId { get; set; }
         public string IdCard { get; set; }
+        public bool DefaultAdminRole { get; set; }
     }
 }

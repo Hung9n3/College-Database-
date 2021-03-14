@@ -7372,20 +7372,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Win 10\\.nuget\\packages\\": {}
+    "C:\\Users\\ocgrb\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Project\\College-Database-\\College Database\\College Database.csproj",
+      "projectUniqueName": "C:\\Users\\ocgrb\\source\\repos\\College-Database-\\College Database\\College Database.csproj",
       "projectName": "College Database",
-      "projectPath": "E:\\Project\\College-Database-\\College Database\\College Database.csproj",
-      "packagesPath": "C:\\Users\\Win 10\\.nuget\\packages\\",
-      "outputPath": "E:\\Project\\College-Database-\\College Database\\obj\\",
+      "projectPath": "C:\\Users\\ocgrb\\source\\repos\\College-Database-\\College Database\\College Database.csproj",
+      "packagesPath": "C:\\Users\\ocgrb\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ocgrb\\source\\repos\\College-Database-\\College Database\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\ocgrb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -7396,12 +7404,13 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "E:\\Project\\College-Database-\\Entities\\Entities.csproj": {
-              "projectPath": "E:\\Project\\College-Database-\\Entities\\Entities.csproj"
+            "C:\\Users\\ocgrb\\source\\repos\\College-Database-\\Entities\\Entities.csproj": {
+              "projectPath": "C:\\Users\\ocgrb\\source\\repos\\College-Database-\\Entities\\Entities.csproj"
             },
-            "E:\\Project\\College-Database-\\Repository\\Repository.csproj": {
-              "projectPath": "E:\\Project\\College-Database-\\Repository\\Repository.csproj"
+            "C:\\Users\\ocgrb\\source\\repos\\College-Database-\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\ocgrb\\source\\repos\\College-Database-\\Repository\\Repository.csproj"
             }
           }
         }
@@ -7414,6 +7423,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "AutoMapper": {
             "target": "Package",
@@ -7472,7 +7482,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

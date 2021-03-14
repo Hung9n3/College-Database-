@@ -34,3 +34,15 @@ C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\E
 C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.pdb
 C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.genruntimeconfig.cache
 C:\Users\chova\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.csprojAssemblyReference.cache
+C:\Users\ocgrb\source\repos\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.deps.json
+C:\Users\ocgrb\source\repos\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.runtimeconfig.json
+C:\Users\ocgrb\source\repos\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.runtimeconfig.dev.json
+C:\Users\ocgrb\source\repos\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.dll
+C:\Users\ocgrb\source\repos\College-Database-\Entities\bin\Debug\netcoreapp3.1\Entities.pdb
+C:\Users\ocgrb\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.csprojAssemblyReference.cache
+C:\Users\ocgrb\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfoInputs.cache
+C:\Users\ocgrb\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfo.cs
+C:\Users\ocgrb\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.csproj.CoreCompileInputs.cache
+C:\Users\ocgrb\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.dll
+C:\Users\ocgrb\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.pdb
+C:\Users\ocgrb\source\repos\College-Database-\Entities\obj\Debug\netcoreapp3.1\Entities.genruntimeconfig.cache

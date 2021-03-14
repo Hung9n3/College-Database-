@@ -135,7 +135,7 @@ namespace WebApplication4.Controllers
                     Subject = new ClaimsIdentity(new Claim[]
                     {
                         new Claim("UserId", user.Id.ToString()),
-                        new Claim("Role", user.Role.ToString()),
+                        new Claim(ClaimTypes.Role, user.Role.ToString()),
                         new Claim("Phone",user.Phone.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),

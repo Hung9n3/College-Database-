@@ -84,11 +84,26 @@ namespace College_Database.Controller
             return Ok();
         }
         [HttpGet]
+        [Authorize(Roles = Role.Teacher)]
         public async Task<List<CoursesDTO>> GetAllCourses()
         {
             var items = await _repoCourses.FindAll();
             List<CoursesDTO> _courses = new List<CoursesDTO>(); 
             foreach(Courses c in items)
+            {
+                var course = _mapper.Map<CoursesDTO>(c);
+                course.Teacher.TeacherName = c.Teacher.UserModel.FullName;
+                _courses.Add(course);
+            }
+            return _courses;
+        }
+        [HttpGet]
+        [Authorize(Roles = Role.Student)]
+        public async Task<List<CoursesDTO>> GetAllCoursesStudentRole()
+        {
+            var items = await _repoCourses.FindAll();
+            List<CoursesDTO> _courses = new List<CoursesDTO>();
+            foreach (Courses c in items)
             {
                 var course = _mapper.Map<CoursesDTO>(c);
                 course.Teacher.TeacherName = c.Teacher.UserModel.FullName;
